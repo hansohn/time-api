@@ -1,0 +1,19 @@
+version: '3'
+services:
+  time:
+    build: .
+    environment:
+      - FLASK_DEBUG=FALSE
+    ports:
+      - "5000:5000"
+  simple:
+    build:
+      context: ./tests/simple_load_test
+      dockerfile: Dockerfile-simple
+    depends_on:
+      - "time"
+    environment:
+      - SIMPLE_TARGET=http://time:5000
+      - SIMPLE_COUNT=1000
+      - SIMPLE_RATE=100
+      - SIMPLE_THREADS=100

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  time:
+    build: .
+    environment:
+      - FLASK_DEBUG=FALSE
+    ports:
+      - "5000:5000"
+  locust:
+    build:
+      context: ./tests/locust
+      dockerfile: Dockerfile-locust
+    depends_on:
+      - "time"
+    environment:
+      - TARGET_URL=http://time:5000
+    ports:
+      - "8089:8089"

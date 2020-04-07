@@ -1,0 +1,4 @@
+FROM locustio/locust
+ENV LOCUST_MODE standalone
+ENV LOCUSTFILE_PATH locustfile.py
+ADD locustfile.py locustfile.py
